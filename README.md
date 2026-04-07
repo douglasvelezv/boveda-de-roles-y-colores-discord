@@ -1,1 +1,0 @@
-# boveda-de-roles-y-colores-discord
