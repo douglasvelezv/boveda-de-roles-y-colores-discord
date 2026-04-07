@@ -1,0 +1,1299 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>🎨 Bóveda de Roles y Colores — Discord</title>
+  <style>
+    :root {
+      --bg-primary:    #1e1f22;
+      --bg-secondary:  #2b2d31;
+      --bg-tertiary:   #313338;
+      --bg-card:       #232428;
+      --accent:        #5865f2;
+      --accent-hover:  #4752c4;
+      --accent-danger: #ed4245;
+      --accent-warn:   #fee75c;
+      --accent-green:  #57f287;
+      --text-primary:  #dbdee1;
+      --text-muted:    #949ba4;
+      --text-white:    #ffffff;
+      --border:        #3f4147;
+      --border-light:  #4e5058;
+      --radius:        8px;
+      --radius-sm:     4px;
+      --shadow:        0 4px 24px rgba(0,0,0,0.4);
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      background: var(--bg-primary);
+      color: var(--text-primary);
+      font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+      font-size: 14px;
+      line-height: 1.5;
+      min-height: 100vh;
+    }
+
+    /* ── HEADER ── */
+    .header {
+      background: linear-gradient(135deg, #23272a 0%, #2c2f33 50%, #23272a 100%);
+      border-bottom: 1px solid var(--border);
+      padding: 28px 24px 22px;
+      text-align: center;
+    }
+    .header h1 {
+      font-size: 26px;
+      font-weight: 700;
+      color: var(--text-white);
+      letter-spacing: -0.5px;
+      margin-bottom: 6px;
+    }
+    .header h1 span { color: var(--accent); }
+    .header p {
+      color: var(--text-muted);
+      font-size: 13px;
+    }
+
+    /* ── ADVERTENCIA TOS ── */
+    .tos-banner {
+      background: linear-gradient(90deg, rgba(237,66,69,0.15), rgba(237,66,69,0.08));
+      border: 1px solid rgba(237,66,69,0.5);
+      border-radius: var(--radius);
+      padding: 14px 18px;
+      margin: 20px auto;
+      max-width: 900px;
+      display: flex;
+      gap: 12px;
+      align-items: flex-start;
+    }
+    .tos-banner .icon { font-size: 20px; flex-shrink: 0; margin-top: 1px; }
+    .tos-banner .content strong {
+      display: block;
+      color: var(--accent-danger);
+      font-size: 13px;
+      margin-bottom: 4px;
+    }
+    .tos-banner .content p {
+      color: var(--text-muted);
+      font-size: 12px;
+      line-height: 1.6;
+    }
+    .tos-banner .content a {
+      color: var(--accent);
+      text-decoration: none;
+    }
+    .tos-banner .content a:hover { text-decoration: underline; }
+
+    /* ── LAYOUT ── */
+    .container {
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 0 20px 40px;
+    }
+
+    /* ── CARDS ── */
+    .card {
+      background: var(--bg-secondary);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 20px;
+      margin-bottom: 16px;
+    }
+    .card-title {
+      font-size: 12px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.8px;
+      color: var(--text-muted);
+      margin-bottom: 14px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .card-title::after {
+      content: '';
+      flex: 1;
+      height: 1px;
+      background: var(--border);
+    }
+
+    /* ── FORM ELEMENTS ── */
+    label {
+      display: block;
+      font-size: 12px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.6px;
+      color: var(--text-muted);
+      margin-bottom: 6px;
+    }
+    input[type="text"], input[type="password"], select {
+      width: 100%;
+      background: var(--bg-tertiary);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-sm);
+      color: var(--text-primary);
+      font-size: 14px;
+      padding: 9px 12px;
+      outline: none;
+      transition: border-color .15s;
+    }
+    input[type="text"]:focus,
+    input[type="password"]:focus,
+    select:focus {
+      border-color: var(--accent);
+    }
+    input[type="text"]::placeholder,
+    input[type="password"]::placeholder {
+      color: var(--text-muted);
+    }
+    select option { background: var(--bg-tertiary); }
+
+    .input-row {
+      display: flex;
+      gap: 10px;
+      align-items: flex-end;
+    }
+    .input-row > div { flex: 1; }
+
+    /* ── BUTTONS ── */
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+      padding: 9px 18px;
+      border: none;
+      border-radius: var(--radius-sm);
+      font-size: 13px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: background .15s, opacity .15s, transform .05s;
+      white-space: nowrap;
+    }
+    .btn:active { transform: scale(0.98); }
+    .btn:disabled { opacity: 0.5; cursor: not-allowed; transform: none; }
+
+    .btn-primary   { background: var(--accent);        color: #fff; }
+    .btn-primary:hover:not(:disabled) { background: var(--accent-hover); }
+
+    .btn-secondary { background: var(--bg-tertiary);   color: var(--text-primary); border: 1px solid var(--border); }
+    .btn-secondary:hover:not(:disabled) { background: var(--border); }
+
+    .btn-danger    { background: var(--accent-danger);  color: #fff; }
+    .btn-danger:hover:not(:disabled) { background: #c03537; }
+
+    .btn-success   { background: #248046; color: #fff; }
+    .btn-success:hover:not(:disabled) { background: #1a6334; }
+
+    .btn-full { width: 100%; justify-content: center; padding: 12px; font-size: 15px; }
+
+    /* ── TOKEN ROW ── */
+    .token-group {
+      position: relative;
+    }
+    .token-group input {
+      padding-right: 80px;
+      font-family: 'Courier New', monospace;
+      letter-spacing: 0.5px;
+    }
+    .token-toggle {
+      position: absolute;
+      right: 8px;
+      top: 50%;
+      transform: translateY(-50%);
+      background: none;
+      border: none;
+      color: var(--text-muted);
+      cursor: pointer;
+      padding: 4px 8px;
+      font-size: 12px;
+      border-radius: var(--radius-sm);
+    }
+    .token-toggle:hover { color: var(--text-primary); background: var(--border); }
+
+    /* ── SERVER SELECT ── */
+    .server-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+    }
+    @media (max-width: 600px) { .server-grid { grid-template-columns: 1fr; } }
+
+    /* ── ROLES LIST ── */
+    #roles-section { display: none; }
+
+    .roles-toolbar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 12px;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+    .roles-count {
+      font-size: 12px;
+      color: var(--text-muted);
+    }
+    .roles-count strong { color: var(--accent); }
+
+    .roles-list {
+      max-height: 380px;
+      overflow-y: auto;
+      border: 1px solid var(--border);
+      border-radius: var(--radius-sm);
+      background: var(--bg-primary);
+    }
+    .roles-list::-webkit-scrollbar { width: 6px; }
+    .roles-list::-webkit-scrollbar-track { background: transparent; }
+    .roles-list::-webkit-scrollbar-thumb { background: var(--border); border-radius: 3px; }
+
+    .role-item {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 10px 14px;
+      border-bottom: 1px solid var(--border);
+      transition: background .1s;
+      cursor: pointer;
+    }
+    .role-item:last-child { border-bottom: none; }
+    .role-item:hover { background: var(--bg-secondary); }
+    .role-item.selected { background: rgba(88,101,242,0.08); }
+
+    .role-checkbox {
+      width: 16px;
+      height: 16px;
+      accent-color: var(--accent);
+      cursor: pointer;
+      flex-shrink: 0;
+    }
+
+    .role-color-preview {
+      width: 20px;
+      height: 20px;
+      border-radius: 50%;
+      flex-shrink: 0;
+      border: 2px solid rgba(255,255,255,0.1);
+    }
+    .role-color-preview.no-color {
+      background: linear-gradient(135deg, #444 25%, transparent 25%) -10px 0,
+                  linear-gradient(225deg, #444 25%, transparent 25%) -10px 0,
+                  linear-gradient(315deg, #444 25%, transparent 25%),
+                  linear-gradient(45deg,  #444 25%, transparent 25%);
+      background-size: 10px 10px;
+      background-color: #333;
+      border-color: var(--border);
+    }
+
+    .role-info { flex: 1; min-width: 0; }
+    .role-name {
+      font-size: 14px;
+      font-weight: 500;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+    .role-meta {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      margin-top: 2px;
+      flex-wrap: wrap;
+    }
+    .role-hex {
+      font-family: 'Courier New', monospace;
+      font-size: 11px;
+      color: var(--text-muted);
+    }
+    .role-badge {
+      font-size: 10px;
+      font-weight: 600;
+      padding: 1px 6px;
+      border-radius: 10px;
+      text-transform: uppercase;
+      letter-spacing: 0.3px;
+    }
+    .badge-hoist   { background: rgba(88,101,242,0.2); color: #7289da; }
+    .badge-mention { background: rgba(87,242,135,0.2); color: #57f287; }
+    .badge-pos     { background: rgba(255,255,255,0.07); color: var(--text-muted); }
+
+    /* ── OPTIONS ── */
+    .options-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+    }
+    @media (max-width: 600px) { .options-grid { grid-template-columns: 1fr; } }
+
+    .option-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+      padding: 12px;
+      background: var(--bg-tertiary);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-sm);
+      cursor: pointer;
+      transition: border-color .15s;
+    }
+    .option-item:hover { border-color: var(--border-light); }
+    .option-item input[type="checkbox"] {
+      width: 15px;
+      height: 15px;
+      accent-color: var(--accent);
+      cursor: pointer;
+      flex-shrink: 0;
+      margin-top: 2px;
+    }
+    .option-item label {
+      cursor: pointer;
+      text-transform: none;
+      letter-spacing: 0;
+      font-size: 13px;
+      font-weight: 500;
+      color: var(--text-primary);
+      margin-bottom: 0;
+    }
+    .option-item .option-desc {
+      font-size: 11px;
+      color: var(--text-muted);
+      margin-top: 2px;
+      font-weight: 400;
+    }
+    .option-item.danger { border-color: rgba(237,66,69,0.3); }
+    .option-item.danger label { color: var(--accent-danger); }
+
+    .delay-row {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 12px;
+      background: var(--bg-tertiary);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-sm);
+    }
+    .delay-row label {
+      white-space: nowrap;
+      text-transform: none;
+      letter-spacing: 0;
+      font-size: 13px;
+      font-weight: 500;
+      color: var(--text-primary);
+      margin: 0;
+    }
+    .delay-row input[type="number"] {
+      width: 90px;
+      background: var(--bg-primary);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-sm);
+      color: var(--text-primary);
+      font-size: 14px;
+      padding: 6px 10px;
+      outline: none;
+    }
+    .delay-row input[type="number"]:focus { border-color: var(--accent); }
+    .delay-row span { font-size: 12px; color: var(--text-muted); }
+
+    /* ── PROGRESS ── */
+    #progress-section { display: none; }
+
+    .progress-bar-wrap {
+      background: var(--bg-primary);
+      border: 1px solid var(--border);
+      border-radius: 100px;
+      height: 10px;
+      overflow: hidden;
+      margin-bottom: 6px;
+    }
+    .progress-bar-fill {
+      height: 100%;
+      background: linear-gradient(90deg, var(--accent), #7289da);
+      border-radius: 100px;
+      transition: width .3s ease;
+      width: 0%;
+    }
+    .progress-label {
+      display: flex;
+      justify-content: space-between;
+      font-size: 12px;
+      color: var(--text-muted);
+    }
+    #progress-pct { font-weight: 700; color: var(--accent); }
+
+    /* ── LOG ── */
+    .log-box {
+      background: var(--bg-primary);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-sm);
+      padding: 12px;
+      font-family: 'Courier New', monospace;
+      font-size: 12px;
+      max-height: 280px;
+      overflow-y: auto;
+      line-height: 1.7;
+    }
+    .log-box::-webkit-scrollbar { width: 6px; }
+    .log-box::-webkit-scrollbar-track { background: transparent; }
+    .log-box::-webkit-scrollbar-thumb { background: var(--border); border-radius: 3px; }
+
+    .log-line { display: flex; gap: 10px; }
+    .log-time { color: #5c6370; flex-shrink: 0; }
+    .log-info    { color: var(--text-muted); }
+    .log-success { color: var(--accent-green); }
+    .log-warning { color: var(--accent-warn); }
+    .log-error   { color: var(--accent-danger); }
+    .log-accent  { color: var(--accent); }
+    .log-empty   { color: var(--text-muted); font-style: italic; text-align: center; padding: 20px 0; }
+
+    /* ── STATUS BADGE ── */
+    .status-dot {
+      display: inline-block;
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: var(--text-muted);
+      margin-right: 6px;
+    }
+    .status-dot.running { background: var(--accent-warn); animation: pulse 1s infinite; }
+    .status-dot.done    { background: var(--accent-green); }
+    .status-dot.error   { background: var(--accent-danger); }
+
+    @keyframes pulse {
+      0%, 100% { opacity: 1; }
+      50%       { opacity: 0.4; }
+    }
+
+    /* ── DIVIDER ── */
+    .divider {
+      height: 1px;
+      background: var(--border);
+      margin: 20px 0;
+    }
+
+    /* ── FOOTER ── */
+    .footer {
+      text-align: center;
+      color: var(--text-muted);
+      font-size: 12px;
+      padding: 20px;
+      border-top: 1px solid var(--border);
+      margin-top: 20px;
+    }
+    .footer a { color: var(--accent); text-decoration: none; }
+    .footer a:hover { text-decoration: underline; }
+
+    /* ── MODAL ── */
+    .modal-overlay {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,0.7);
+      z-index: 100;
+      align-items: center;
+      justify-content: center;
+    }
+    .modal-overlay.active { display: flex; }
+    .modal {
+      background: var(--bg-secondary);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 28px;
+      max-width: 440px;
+      width: 90%;
+      box-shadow: var(--shadow);
+    }
+    .modal h3 {
+      font-size: 18px;
+      color: var(--text-white);
+      margin-bottom: 12px;
+    }
+    .modal p {
+      color: var(--text-muted);
+      font-size: 13px;
+      margin-bottom: 20px;
+      line-height: 1.7;
+    }
+    .modal-actions {
+      display: flex;
+      gap: 10px;
+      justify-content: flex-end;
+    }
+
+    /* ── HELPER ── */
+    .helper-text {
+      font-size: 11px;
+      color: var(--text-muted);
+      margin-top: 5px;
+    }
+
+    /* ── CHIP ── */
+    .chip {
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      background: var(--bg-tertiary);
+      border: 1px solid var(--border);
+      border-radius: 100px;
+      padding: 3px 10px;
+      font-size: 12px;
+      color: var(--text-muted);
+    }
+    .chip.active { background: rgba(88,101,242,0.15); border-color: var(--accent); color: var(--accent); }
+  </style>
+</head>
+<body>
+
+<!-- HEADER -->
+<div class="header">
+  <h1>🎨 Bóveda de <span>Roles y Colores</span> — Discord</h1>
+  <p>Copia roles y colores exactos entre servidores · 100% en el navegador · Sin instalación</p>
+</div>
+
+<!-- TOS WARNING -->
+<div style="padding: 0 20px;">
+  <div class="tos-banner">
+    <div class="icon">⚠️</div>
+    <div class="content">
+      <strong>Advertencia — Términos de Servicio de Discord</strong>
+      <p>
+        El uso de tokens de usuario para automatizar acciones puede violar los
+        <a href="https://discord.com/terms" target="_blank">Términos de Servicio de Discord</a>.
+        Esta herramienta es solo para fines educativos. Úsala <strong>bajo tu propia responsabilidad</strong>.
+        Tu token <strong>nunca sale de tu navegador</strong> — todo el código se ejecuta localmente.
+      </p>
+    </div>
+  </div>
+</div>
+
+<div class="container">
+
+  <!-- STEP 1: TOKEN -->
+  <div class="card">
+    <div class="card-title">1 · Autenticación</div>
+
+    <label for="token-input">Token de usuario de Discord</label>
+    <div class="token-group" style="margin-bottom: 8px;">
+      <input type="password" id="token-input" placeholder="Tu token de usuario de Discord..." autocomplete="off" />
+      <button class="token-toggle" onclick="toggleToken()" id="token-toggle-btn">👁 Ver</button>
+    </div>
+    <p class="helper-text">
+      ¿Cómo obtengo mi token?
+      Abre Discord Web → F12 → Consola → pega:
+      <code style="background:var(--bg-primary);padding:1px 5px;border-radius:3px;font-size:11px;">
+        (webpackChunkdiscord_app.push([[''],{},e=>{m=[];for(let c in e.c)m.push(e.c[c])}]),m).find(m=>m?.exports?.default?.getToken!==void 0).exports.default.getToken()
+      </code>
+    </p>
+
+    <div style="margin-top: 14px;">
+      <button class="btn btn-primary" onclick="loadGuilds()" id="btn-load-guilds">
+        🔄 Cargar servidores
+      </button>
+    </div>
+  </div>
+
+  <!-- STEP 2: SERVER SELECTION -->
+  <div class="card" id="server-section" style="display:none;">
+    <div class="card-title">2 · Selección de servidores</div>
+
+    <div class="server-grid">
+      <div>
+        <label for="guild-origin">Servidor origen</label>
+        <select id="guild-origin" onchange="onOriginChange()">
+          <option value="">— Selecciona origen —</option>
+        </select>
+        <p class="helper-text">Los roles se cargarán de aquí</p>
+      </div>
+      <div>
+        <label for="guild-dest">Servidor destino</label>
+        <select id="guild-dest">
+          <option value="">— Selecciona destino —</option>
+        </select>
+        <p class="helper-text">Los roles se crearán aquí</p>
+      </div>
+    </div>
+
+    <div style="margin-top: 14px;">
+      <button class="btn btn-secondary" onclick="loadRoles()" id="btn-load-roles" disabled>
+        📋 Cargar roles del origen
+      </button>
+    </div>
+  </div>
+
+  <!-- STEP 3: ROLES LIST -->
+  <div class="card" id="roles-section">
+    <div class="card-title">3 · Roles disponibles</div>
+
+    <div class="roles-toolbar">
+      <span class="roles-count">
+        <strong id="selected-count">0</strong> de <strong id="total-count">0</strong> roles seleccionados
+      </span>
+      <div style="display:flex;gap:8px;">
+        <button class="btn btn-secondary" style="padding:5px 12px;font-size:12px;" onclick="selectAll()">✅ Todos</button>
+        <button class="btn btn-secondary" style="padding:5px 12px;font-size:12px;" onclick="deselectAll()">⬜ Ninguno</button>
+      </div>
+    </div>
+
+    <div class="roles-list" id="roles-list">
+      <div class="log-empty">Carga un servidor origen para ver sus roles</div>
+    </div>
+  </div>
+
+  <!-- STEP 4: OPTIONS -->
+  <div class="card" id="options-section" style="display:none;">
+    <div class="card-title">4 · Opciones de copia</div>
+
+    <div class="options-grid">
+      <label class="option-item">
+        <input type="checkbox" id="opt-color" checked />
+        <div>
+          <label for="opt-color">🎨 Copiar color exacto</label>
+          <div class="option-desc">Mantiene el código HEX del rol original</div>
+        </div>
+      </label>
+
+      <label class="option-item">
+        <input type="checkbox" id="opt-hoist" checked />
+        <div>
+          <label for="opt-hoist">📌 Copiar hoist (separado)</label>
+          <div class="option-desc">Muestra el rol separado en la lista de miembros</div>
+        </div>
+      </label>
+
+      <label class="option-item">
+        <input type="checkbox" id="opt-mentionable" />
+        <div>
+          <label for="opt-mentionable">🔔 Copiar mentionable</label>
+          <div class="option-desc">Cualquier miembro puede @mencionar el rol</div>
+        </div>
+      </label>
+
+      <label class="option-item">
+        <input type="checkbox" id="opt-permissions" />
+        <div>
+          <label for="opt-permissions">🔐 Copiar permisos (bitfield)</label>
+          <div class="option-desc">⚠️ Incluye todos los permisos del rol original</div>
+        </div>
+      </label>
+
+      <label class="option-item">
+        <input type="checkbox" id="opt-position" checked />
+        <div>
+          <label for="opt-position">📊 Respetar posición/orden</label>
+          <div class="option-desc">Recrea la jerarquía de roles en el mismo orden</div>
+        </div>
+      </label>
+
+      <label class="option-item danger">
+        <input type="checkbox" id="opt-delete" onchange="onDeleteToggle()" />
+        <div>
+          <label for="opt-delete">🗑️ Eliminar roles existentes</label>
+          <div class="option-desc">⚠️ IRREVERSIBLE — borra todos los roles del destino antes de copiar</div>
+        </div>
+      </label>
+    </div>
+
+    <div class="delay-row" style="margin-top:10px;">
+      <label>⏱ Delay entre peticiones:</label>
+      <input type="number" id="opt-delay" value="350" min="100" max="5000" step="50" />
+      <span>ms &nbsp;(mínimo recomendado: 300ms)</span>
+    </div>
+  </div>
+
+  <!-- STEP 5: START -->
+  <div id="start-section" style="display:none;">
+    <button class="btn btn-success btn-full" onclick="startCopy()" id="btn-start">
+      🚀 Iniciar copia de roles
+    </button>
+  </div>
+
+  <!-- PROGRESS + LOG -->
+  <div class="card" id="progress-section" style="margin-top:16px;">
+    <div class="card-title">
+      <span class="status-dot" id="status-dot"></span>
+      Progreso
+    </div>
+
+    <div class="progress-bar-wrap">
+      <div class="progress-bar-fill" id="progress-bar"></div>
+    </div>
+    <div class="progress-label">
+      <span id="progress-text">Iniciando...</span>
+      <span id="progress-pct">0%</span>
+    </div>
+
+    <div class="divider"></div>
+
+    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px;">
+      <span style="font-size:12px;font-weight:600;color:var(--text-muted);text-transform:uppercase;letter-spacing:.6px;">Log</span>
+      <button class="btn btn-secondary" style="padding:4px 10px;font-size:11px;" onclick="clearLog()">🗑 Limpiar</button>
+    </div>
+    <div class="log-box" id="log-box">
+      <div class="log-empty">El log aparecerá aquí durante la copia</div>
+    </div>
+  </div>
+
+</div><!-- /container -->
+
+<!-- FOOTER -->
+<div class="footer">
+  🎨 Bóveda de Roles y Colores — Discord &nbsp;·&nbsp;
+  100% del lado del cliente &nbsp;·&nbsp;
+  Tu token nunca sale de tu navegador &nbsp;·&nbsp;
+  <a href="https://github.com/douglasvelezv" target="_blank">GitHub</a>
+</div>
+
+<!-- MODAL CONFIRM DELETE -->
+<div class="modal-overlay" id="modal-delete">
+  <div class="modal">
+    <h3>⚠️ ¿Estás seguro?</h3>
+    <p>
+      Activar esta opción eliminará <strong style="color:var(--accent-danger)">todos los roles</strong>
+      del servidor destino (excepto <code>@everyone</code>) antes de crear los nuevos.<br><br>
+      Esta acción es <strong>completamente irreversible</strong> y podría afectar permisos
+      de canales y miembros en el servidor destino.<br><br>
+      ¿Deseas continuar?
+    </p>
+    <div class="modal-actions">
+      <button class="btn btn-secondary" onclick="cancelDelete()">Cancelar</button>
+      <button class="btn btn-danger" onclick="confirmDelete()">Sí, activar igualmente</button>
+    </div>
+  </div>
+</div>
+
+<script>
+  // ═══════════════════════════════════════════════
+  //  ESTADO GLOBAL
+  // ═══════════════════════════════════════════════
+  const API = 'https://discord.com/api/v9';
+  let allGuilds  = [];
+  let rolesList  = []; // roles del servidor origen
+  let isCopying  = false;
+
+  // ═══════════════════════════════════════════════
+  //  UTILS
+  // ═══════════════════════════════════════════════
+  function sleep(ms) { return new Promise(r => setTimeout(r, ms)); }
+
+  function intToHex(n) {
+    if (!n || n === 0) return null;
+    return '#' + n.toString(16).padStart(6, '0').toUpperCase();
+  }
+
+  function hexToInt(hex) {
+    if (!hex) return 0;
+    return parseInt(hex.replace('#', ''), 16);
+  }
+
+  function now() {
+    return new Date().toLocaleTimeString('es-ES', { hour12: false });
+  }
+
+  // ═══════════════════════════════════════════════
+  //  TOKEN TOGGLE
+  // ═══════════════════════════════════════════════
+  function toggleToken() {
+    const inp = document.getElementById('token-input');
+    const btn = document.getElementById('token-toggle-btn');
+    if (inp.type === 'password') {
+      inp.type = 'text';
+      btn.textContent = '🙈 Ocultar';
+    } else {
+      inp.type = 'password';
+      btn.textContent = '👁 Ver';
+    }
+  }
+
+  // ═══════════════════════════════════════════════
+  //  LOG
+  // ═══════════════════════════════════════════════
+  function log(msg, type = 'info') {
+    const box = document.getElementById('log-box');
+    // Quitar placeholder
+    const empty = box.querySelector('.log-empty');
+    if (empty) empty.remove();
+
+    const line = document.createElement('div');
+    line.className = 'log-line';
+    line.innerHTML = `<span class="log-time">[${now()}]</span><span class="log-${type}">${msg}</span>`;
+    box.appendChild(line);
+    box.scrollTop = box.scrollHeight;
+  }
+
+  function clearLog() {
+    const box = document.getElementById('log-box');
+    box.innerHTML = '<div class="log-empty">Log limpiado</div>';
+  }
+
+  // ═══════════════════════════════════════════════
+  //  PROGRESO
+  // ═══════════════════════════════════════════════
+  function setProgress(current, total, label) {
+    const pct = total > 0 ? Math.round((current / total) * 100) : 0;
+    document.getElementById('progress-bar').style.width = pct + '%';
+    document.getElementById('progress-pct').textContent  = pct + '%';
+    document.getElementById('progress-text').textContent = label || '';
+  }
+
+  function setStatus(state) {
+    const dot = document.getElementById('status-dot');
+    dot.className = 'status-dot ' + (state || '');
+  }
+
+  // ═══════════════════════════════════════════════
+  //  API HELPER
+  // ═══════════════════════════════════════════════
+  async function discordFetch(endpoint, options = {}) {
+    const token = document.getElementById('token-input').value.trim();
+    const res = await fetch(API + endpoint, {
+      ...options,
+      headers: {
+        'Authorization': token,
+        'Content-Type': 'application/json',
+        ...(options.headers || {})
+      }
+    });
+
+    if (res.status === 429) {
+      const data = await res.json();
+      const retryAfter = (data.retry_after || 1) * 1000;
+      log(`⏳ Rate limit — esperando ${(retryAfter/1000).toFixed(1)}s...`, 'warning');
+      await sleep(retryAfter + 200);
+      return discordFetch(endpoint, options);
+    }
+
+    return res;
+  }
+
+  // ═══════════════════════════════════════════════
+  //  CARGAR SERVIDORES
+  // ═══════════════════════════════════════════════
+  async function loadGuilds() {
+    const token = document.getElementById('token-input').value.trim();
+    if (!token) { alert('Por favor, introduce tu token de Discord.'); return; }
+
+    const btn = document.getElementById('btn-load-guilds');
+    btn.disabled = true;
+    btn.textContent = '⏳ Cargando...';
+
+    try {
+      const res = await discordFetch('/users/@me/guilds');
+      if (!res.ok) {
+        alert(`Error al cargar servidores (${res.status}). Verifica que tu token sea correcto.`);
+        return;
+      }
+      allGuilds = await res.json();
+      allGuilds.sort((a, b) => a.name.localeCompare(b.name));
+
+      const orig  = document.getElementById('guild-origin');
+      const dest  = document.getElementById('guild-dest');
+      [orig, dest].forEach(sel => {
+        sel.innerHTML = '<option value="">— Selecciona un servidor —</option>';
+        allGuilds.forEach(g => {
+          const opt = document.createElement('option');
+          opt.value = g.id;
+          opt.textContent = g.name;
+          sel.appendChild(opt);
+        });
+      });
+
+      document.getElementById('server-section').style.display = 'block';
+      log(`✅ ${allGuilds.length} servidores cargados correctamente`, 'success');
+      document.getElementById('progress-section').style.display = 'block';
+
+    } catch(e) {
+      alert('Error de red: ' + e.message);
+      log('❌ Error de red: ' + e.message, 'error');
+    } finally {
+      btn.disabled = false;
+      btn.textContent = '🔄 Cargar servidores';
+    }
+  }
+
+  // ═══════════════════════════════════════════════
+  //  CAMBIO EN SELECT ORIGEN
+  // ═══════════════════════════════════════════════
+  function onOriginChange() {
+    const val = document.getElementById('guild-origin').value;
+    document.getElementById('btn-load-roles').disabled = !val;
+
+    if (!val) {
+      document.getElementById('roles-section').style.display = 'none';
+      document.getElementById('options-section').style.display = 'none';
+      document.getElementById('start-section').style.display = 'none';
+    }
+  }
+
+  // ═══════════════════════════════════════════════
+  //  CARGAR ROLES DEL ORIGEN
+  // ═══════════════════════════════════════════════
+  async function loadRoles() {
+    const guildId = document.getElementById('guild-origin').value;
+    if (!guildId) return;
+
+    const btn = document.getElementById('btn-load-roles');
+    btn.disabled = true;
+    btn.textContent = '⏳ Cargando roles...';
+
+    try {
+      const res = await discordFetch(`/guilds/${guildId}/roles`);
+      if (!res.ok) {
+        alert(`Error al cargar roles (${res.status}). Verifica tus permisos en el servidor.`);
+        return;
+      }
+
+      const roles = await res.json();
+      // Filtrar @everyone y ordenar por posición descendente
+      rolesList = roles
+        .filter(r => r.name !== '@everyone')
+        .sort((a, b) => b.position - a.position);
+
+      renderRoles();
+      document.getElementById('roles-section').style.display = 'block';
+      document.getElementById('options-section').style.display = 'block';
+      document.getElementById('start-section').style.display = 'block';
+      log(`📋 ${rolesList.length} roles cargados del servidor origen`, 'accent');
+
+    } catch(e) {
+      alert('Error de red: ' + e.message);
+      log('❌ Error: ' + e.message, 'error');
+    } finally {
+      btn.disabled = false;
+      btn.textContent = '📋 Cargar roles del origen';
+    }
+  }
+
+  // ═══════════════════════════════════════════════
+  //  RENDERIZAR LISTA DE ROLES
+  // ═══════════════════════════════════════════════
+  function renderRoles() {
+    const list = document.getElementById('roles-list');
+    list.innerHTML = '';
+
+    if (rolesList.length === 0) {
+      list.innerHTML = '<div class="log-empty">No se encontraron roles (excepto @everyone)</div>';
+      updateCount();
+      return;
+    }
+
+    rolesList.forEach((role, idx) => {
+      const hex    = intToHex(role.color);
+      const noColor = !hex;
+      const colorDisplay = hex || '#99AAB5';
+
+      const item = document.createElement('div');
+      item.className = 'role-item selected';
+      item.dataset.idx = idx;
+      item.onclick = () => toggleRole(idx);
+
+      // Color preview
+      const preview = document.createElement('div');
+      preview.className = 'role-color-preview' + (noColor ? ' no-color' : '');
+      if (!noColor) preview.style.backgroundColor = colorDisplay;
+
+      // Checkbox
+      const cb = document.createElement('input');
+      cb.type = 'checkbox';
+      cb.className = 'role-checkbox';
+      cb.checked = true;
+      cb.id = `role-cb-${idx}`;
+      cb.onclick = (e) => { e.stopPropagation(); toggleRole(idx); };
+
+      // Info
+      const info = document.createElement('div');
+      info.className = 'role-info';
+
+      const nameEl = document.createElement('div');
+      nameEl.className = 'role-name';
+      nameEl.style.color = noColor ? 'var(--text-primary)' : colorDisplay;
+      nameEl.textContent = role.name;
+
+      const meta = document.createElement('div');
+      meta.className = 'role-meta';
+
+      if (!noColor) {
+        const hexBadge = document.createElement('span');
+        hexBadge.className = 'role-hex';
+        hexBadge.textContent = hex;
+        meta.appendChild(hexBadge);
+      } else {
+        const hexBadge = document.createElement('span');
+        hexBadge.className = 'role-hex';
+        hexBadge.textContent = 'Sin color';
+        meta.appendChild(hexBadge);
+      }
+
+      const posBadge = document.createElement('span');
+      posBadge.className = 'role-badge badge-pos';
+      posBadge.textContent = `pos ${role.position}`;
+      meta.appendChild(posBadge);
+
+      if (role.hoist) {
+        const hoistBadge = document.createElement('span');
+        hoistBadge.className = 'role-badge badge-hoist';
+        hoistBadge.textContent = 'separado';
+        meta.appendChild(hoistBadge);
+      }
+
+      if (role.mentionable) {
+        const mentBadge = document.createElement('span');
+        mentBadge.className = 'role-badge badge-mention';
+        mentBadge.textContent = '@mencionar';
+        meta.appendChild(mentBadge);
+      }
+
+      info.appendChild(nameEl);
+      info.appendChild(meta);
+
+      item.appendChild(cb);
+      item.appendChild(preview);
+      item.appendChild(info);
+      list.appendChild(item);
+    });
+
+    updateCount();
+  }
+
+  function toggleRole(idx) {
+    const cb = document.getElementById(`role-cb-${idx}`);
+    const item = document.querySelector(`.role-item[data-idx="${idx}"]`);
+    cb.checked = !cb.checked;
+    item.classList.toggle('selected', cb.checked);
+    updateCount();
+  }
+
+  function selectAll() {
+    rolesList.forEach((_, idx) => {
+      const cb   = document.getElementById(`role-cb-${idx}`);
+      const item = document.querySelector(`.role-item[data-idx="${idx}"]`);
+      if (cb) { cb.checked = true; item.classList.add('selected'); }
+    });
+    updateCount();
+  }
+
+  function deselectAll() {
+    rolesList.forEach((_, idx) => {
+      const cb   = document.getElementById(`role-cb-${idx}`);
+      const item = document.querySelector(`.role-item[data-idx="${idx}"]`);
+      if (cb) { cb.checked = false; item.classList.remove('selected'); }
+    });
+    updateCount();
+  }
+
+  function updateCount() {
+    const total    = rolesList.length;
+    const selected = rolesList.filter((_, i) => {
+      const cb = document.getElementById(`role-cb-${i}`);
+      return cb && cb.checked;
+    }).length;
+    document.getElementById('total-count').textContent    = total;
+    document.getElementById('selected-count').textContent = selected;
+  }
+
+  function getSelectedRoles() {
+    return rolesList.filter((_, i) => {
+      const cb = document.getElementById(`role-cb-${i}`);
+      return cb && cb.checked;
+    });
+  }
+
+  // ═══════════════════════════════════════════════
+  //  MODAL ELIMINAR
+  // ═══════════════════════════════════════════════
+  function onDeleteToggle() {
+    const cb = document.getElementById('opt-delete');
+    if (cb.checked) {
+      document.getElementById('modal-delete').classList.add('active');
+    }
+  }
+
+  function cancelDelete() {
+    document.getElementById('opt-delete').checked = false;
+    document.getElementById('modal-delete').classList.remove('active');
+  }
+
+  function confirmDelete() {
+    document.getElementById('modal-delete').classList.remove('active');
+    log('⚠️ Opción "Eliminar roles existentes" ACTIVADA — los roles del destino serán borrados', 'warning');
+  }
+
+  // ═══════════════════════════════════════════════
+  //  INICIAR COPIA
+  // ═══════════════════════════════════════════════
+  async function startCopy() {
+    if (isCopying) return;
+
+    const destId   = document.getElementById('guild-dest').value;
+    const origId   = document.getElementById('guild-origin').value;
+    const selected = getSelectedRoles();
+
+    if (!destId) { alert('Por favor, selecciona un servidor destino.'); return; }
+    if (!origId) { alert('Por favor, selecciona un servidor origen.'); return; }
+    if (destId === origId) { alert('El servidor origen y destino no pueden ser el mismo.'); return; }
+    if (selected.length === 0) { alert('Por favor, selecciona al menos un rol para copiar.'); return; }
+
+    const opts = {
+      color:       document.getElementById('opt-color').checked,
+      hoist:       document.getElementById('opt-hoist').checked,
+      mentionable: document.getElementById('opt-mentionable').checked,
+      permissions: document.getElementById('opt-permissions').checked,
+      position:    document.getElementById('opt-position').checked,
+      deleteFirst: document.getElementById('opt-delete').checked,
+      delay:       parseInt(document.getElementById('opt-delay').value) || 350,
+    };
+
+    // Confirmación final
+    const destName = document.getElementById('guild-dest').options[document.getElementById('guild-dest').selectedIndex].text;
+    const origName = document.getElementById('guild-origin').options[document.getElementById('guild-origin').selectedIndex].text;
+    const msg = `¿Copiar ${selected.length} roles de "${origName}" a "${destName}"?` +
+      (opts.deleteFirst ? '\n\n⚠️ ADVERTENCIA: Los roles existentes en el destino serán ELIMINADOS primero.' : '');
+    if (!confirm(msg)) return;
+
+    isCopying = true;
+    document.getElementById('btn-start').disabled = true;
+    document.getElementById('btn-start').textContent = '⏳ Copiando roles...';
+    document.getElementById('progress-section').style.display = 'block';
+    setStatus('running');
+    setProgress(0, 1, 'Iniciando...');
+
+    log('━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━', 'info');
+    log(`🚀 Iniciando copia de ${selected.length} roles`, 'accent');
+    log(`   Origen: ${origName}`, 'info');
+    log(`   Destino: ${destName}`, 'info');
+    log('━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━', 'info');
+
+    try {
+      // ── FASE 1: Eliminar roles existentes ──
+      if (opts.deleteFirst) {
+        log('🗑️ Fase 1/2: Eliminando roles existentes en el destino...', 'warning');
+        const resRoles = await discordFetch(`/guilds/${destId}/roles`);
+        if (!resRoles.ok) throw new Error(`No se pudieron obtener los roles del destino (${resRoles.status})`);
+
+        const destRoles = (await resRoles.json()).filter(r => r.name !== '@everyone');
+        log(`   Encontrados ${destRoles.length} roles a eliminar`, 'info');
+
+        for (let i = 0; i < destRoles.length; i++) {
+          const r = destRoles[i];
+          setProgress(i, destRoles.length, `Eliminando: ${r.name}`);
+          const del = await discordFetch(`/guilds/${destId}/roles/${r.id}`, { method: 'DELETE' });
+          if (del.ok) {
+            log(`   🗑 Eliminado: ${r.name}`, 'warning');
+          } else {
+            log(`   ⚠️ No se pudo eliminar: ${r.name} (${del.status})`, 'warning');
+          }
+          await sleep(opts.delay);
+        }
+        log('✅ Roles existentes eliminados', 'success');
+      }
+
+      // ── FASE 2: Crear roles ──
+      const phaseLbl = opts.deleteFirst ? 'Fase 2/2' : 'Fase 1/1';
+      log(`📝 ${phaseLbl}: Creando ${selected.length} roles...`, 'accent');
+
+      // Ordenar seleccionados: de menor a mayor posición (creamos de abajo a arriba)
+      const toCreate = opts.position
+        ? [...selected].sort((a, b) => a.position - b.position)
+        : selected;
+
+      const created = [];
+      let okCount   = 0;
+      let errCount  = 0;
+
+      for (let i = 0; i < toCreate.length; i++) {
+        const role = toCreate[i];
+        const hex  = intToHex(role.color);
+        setProgress(i + 1, toCreate.length, `Creando: ${role.name}`);
+
+        const body = {
+          name: role.name,
+        };
+        if (opts.color)       body.color        = role.color || 0;
+        if (opts.hoist)       body.hoist         = role.hoist;
+        if (opts.mentionable) body.mentionable   = role.mentionable;
+        if (opts.permissions) body.permissions   = role.permissions;
+
+        const res = await discordFetch(`/guilds/${destId}/roles`, {
+          method: 'POST',
+          body: JSON.stringify(body)
+        });
+
+        if (res.ok) {
+          const newRole = await res.json();
+          created.push({ originalPos: role.position, newId: newRole.id, name: role.name });
+          const colorTxt = hex ? hex : 'sin color';
+          log(`✅ Creado: ${role.name} (${colorTxt})`, 'success');
+          okCount++;
+        } else {
+          const err = await res.json().catch(() => ({}));
+          log(`❌ Error creando: ${role.name} — ${err.message || res.status}`, 'error');
+          errCount++;
+        }
+
+        await sleep(opts.delay);
+      }
+
+      // ── FASE 3: Ajustar posiciones ──
+      if (opts.position && created.length > 1) {
+        log('📊 Ajustando posiciones de roles...', 'info');
+        await sleep(500);
+
+        // Obtener roles actuales del destino para mapear IDs
+        const currRes = await discordFetch(`/guilds/${destId}/roles`);
+        if (currRes.ok) {
+          const currRoles = await currRes.json();
+
+          // Construir payload de posiciones
+          // created está ordenado de menor a mayor posición original → asignamos posiciones 1,2,3...
+          const posPayload = created.map((cr, idx) => ({
+            id: cr.newId,
+            position: idx + 1
+          }));
+
+          const patchRes = await discordFetch(`/guilds/${destId}/roles`, {
+            method: 'PATCH',
+            body: JSON.stringify(posPayload)
+          });
+
+          if (patchRes.ok) {
+            log('✅ Posiciones ajustadas correctamente', 'success');
+          } else {
+            log('⚠️ No se pudieron ajustar las posiciones (permisos insuficientes o jerarquía)', 'warning');
+          }
+        }
+      }
+
+      // ── RESUMEN ──
+      setProgress(toCreate.length, toCreate.length, 'Completado');
+      setStatus('done');
+      log('━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━', 'info');
+      log(`🎉 ¡Copia completada!`, 'success');
+      log(`   ✅ Creados exitosamente: ${okCount}`, 'success');
+      if (errCount > 0) log(`   ❌ Con errores: ${errCount}`, 'error');
+      log('━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━', 'info');
+
+    } catch(e) {
+      setStatus('error');
+      log(`❌ Error inesperado: ${e.message}`, 'error');
+      console.error(e);
+    } finally {
+      isCopying = false;
+      document.getElementById('btn-start').disabled = false;
+      document.getElementById('btn-start').textContent = '🚀 Iniciar copia de roles';
+    }
+  }
+
+  // ═══════════════════════════════════════════════
+  //  INIT
+  // ═══════════════════════════════════════════════
+  document.getElementById('guild-origin').addEventListener('change', onOriginChange);
+  document.getElementById('guild-dest').addEventListener('change', () => {
+    const orig = document.getElementById('guild-origin').value;
+    const dest = document.getElementById('guild-dest').value;
+    if (orig && dest && orig === dest) {
+      log('⚠️ El servidor origen y destino son el mismo', 'warning');
+    }
+  });
+</script>
+</body>
+</html>
